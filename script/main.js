@@ -53,7 +53,43 @@
         element.addEventListener('click', changeElements, false);
       });
 
-      
+      function popLightbox(currentIndex, currentObject){
+        window.scrollTo(0, 0);
+        document.body.style.overflow='hidden';
+
+        let lightbox = document.querySelector('.lightbox');
+          lightbox.style.display = 'block';
+
+        //populate all the content on the page
+        let lightboxImg = lightbox.querySelector('img');
+        let lightboxClose = lightbox.querySelector('.close-lightbox');
+        let lightboxDesc = lightbox.querySelector('p');
+
+        lightboxImg.src = "images/" + currentObject.images[currentIndex];
+        lightboxDesc.innerHTML = currentObject.imageDescription[currentIndex];
+
+        lightboxClose.addEventListener('click', function() {
+          closeLightBox(lightbox, lightboxImg, lightboxDesc);
+        }, false);
+      }
+
+      function closeLightBox(lightbox, lightboxImg, lightboxDesc){
+        
+        //remove the style attribute from the body 
+        //allow page to scroll again
+        document.body.removeAttribute("style");
+
+        //utilize the injected variables and reset their contents
+        //hide the lightbox 
+        lightbox.removeAttribute("style");
+        //reset the lightbox image source 
+        lightboxImg.removeAttribute("src");
+        //set the description to nothing 
+        lightboxDesc.innerHTML = '';
+
+
+      }
+
       // initialize the app
       // theSubhead.firstChild.nodeValue = dynamicContent['spring'].headline;
       // theSeasonText.firstChild.nodeValue = dynamicContent['spring'].text;
